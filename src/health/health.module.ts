@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { TerminusModule } from '@nestjs/terminus';
 
-@Module({})
+@Module({
+    imports: [TerminusModule]
+})
 export class HealthModule {}
