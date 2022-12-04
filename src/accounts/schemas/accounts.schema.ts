@@ -1,4 +1,3 @@
-import { Moment } from 'moment-timezone';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { getDate } from 'src/utils/date.utils';
@@ -11,15 +10,15 @@ export class Accounts {
     @Prop({
         type: Date,
     })
-    createdAt: Moment;
+    createdAt: Date;
     @Prop({
         type: Date
     })
-    updatedAt: Moment;
+    updatedAt: Date;
     @Prop({
         type: Date
     })
-    lastLogin: Moment;
+    lastLogin: Date;
     
     // Status management
     @Prop({
