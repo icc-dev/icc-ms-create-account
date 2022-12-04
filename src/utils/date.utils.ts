@@ -1,5 +1,5 @@
 import { ConfigService } from '@nestjs/config';
-import app from '../main';
+import { app } from '../main';
 
 const configService = app.get(ConfigService);
 
