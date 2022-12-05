@@ -1,7 +1,7 @@
 import { Controller, Post, Res, Body, HttpStatus, HttpCode, Version, UseFilters } from '@nestjs/common';
 import { Response } from 'express';
-import { CreateAccountDto } from 'src/accounts/dto/create-account.dto';
-import { AccountsService } from 'src/accounts/services/accounts/accounts.service';
+import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
+import { AccountsService } from '../../../accounts/services/accounts/accounts.service';
 
 @Controller('add')
 export class AddController {
