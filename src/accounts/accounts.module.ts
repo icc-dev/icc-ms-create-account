@@ -26,7 +26,7 @@ const configMongoose = {
 const accountServiceProvider = {
     provide: AccountsService,
     useClass:
-        process.env.NODE_ENV === 'testing' ?
+        process.env.NODE_ENV === 'development' ?
         AccountsMockService : AccountsService
 }
 @Module({
@@ -35,7 +35,7 @@ const accountServiceProvider = {
         MongooseModule.forRootAsync(configMongoose),
         MongooseModule.forFeature([
             {
-                name: Accounts.name,
+                name: 'Accounts',
                 schema: AccountsSchema,
             }
         ])
