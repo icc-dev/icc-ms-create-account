@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { getDate } from 'src/utils/date.utils';
+import { getDate } from '../../utils/date.utils';
 import { StatusAccountAvailable, TypeAccountAvailable } from '../enums/accounts.enum';
 
 
