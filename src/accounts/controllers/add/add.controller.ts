@@ -13,16 +13,14 @@ export class AddController {
     @HttpCode(201)
     @Version('1')
     async createAccount(@Res() res: Response, @Body() createAccountDto: CreateAccountDto) {
-        let step = ''
         try {
-            if (!Object.keys(createAccountDto).length) {
+            if (!createAccountDto || !Object.keys(createAccountDto).length) {
                 return res.status(HttpStatus.UNPROCESSABLE_ENTITY).send();
             }
             const accountCreated = await this.accountsService.addAccount(createAccountDto);
-            return res.json({accountCreated});
+            return res.status(HttpStatus.CREATED).send({accountCreated});
         } catch (error) {
-            console.log(error)
-            return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+            return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
                 error
             });
         }
