@@ -10,7 +10,6 @@ export class AddController {
         private accountsService: AccountsService,
         private loggerService: LoggerService,
     ) {
-        this.loggerService.setContext('AddController')
     }
 
     @Post()
@@ -20,14 +19,14 @@ export class AddController {
         try {
             this.loggerService.log('Create account controller init');
             if (!createAccountDto || !Object.keys(createAccountDto).length) {
-                this.loggerService.error('Unprocessable entity');
+                this.loggerService.warn('Unprocessable entity', createAccountDto);
                 return res.status(HttpStatus.UNPROCESSABLE_ENTITY).send();
             }
-            const accountCreated = await this.accountsService.addAccount(createAccountDto);
-            this.loggerService.log('Add account intruction finished correctly');
+            const accountCreated = await this.accountsService.addAccount(createAccountDto, this.loggerService);
+            this.loggerService.log('Add account intruction finished correctly', accountCreated);
             return res.status(HttpStatus.CREATED).send({accountCreated});
         } catch (error) {
-            this.loggerService.error('An error has occurred');
+            this.loggerService.error('An error has occurred', error);
             return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
                 error
             });

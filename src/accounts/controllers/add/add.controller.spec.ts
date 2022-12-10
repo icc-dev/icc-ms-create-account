@@ -8,7 +8,14 @@ import { DUPLICATE_CREATE_ACCOUNT_DTO, MISSING_CREATE_ACCOUNT_DTO, VALID_CREATE_
 
 describe('AddController', () => {
   let controller: AddController;
+  let logger: LoggerService;
   let response: any;
+
+  let loggerService = { 
+    log: (message: string, additionalData: any) => {},
+    error: (message: string, additionalData: any) => {},
+    warn: (message: string, additionalData: any) => {},
+  };
 
   const mockResponse = () => {
     const res: any = {};
@@ -23,14 +30,18 @@ describe('AddController', () => {
       controllers: [AddController],
       providers: [
         AccountsService,
-        LoggerService
+        {
+          provide: LoggerService,
+          useValue: loggerService
+        },
       ]
     }).overrideProvider(AccountsService)
     .useClass(AccountsMockService)
     .compile();
 
     controller = module.get<AddController>(AddController);
-
+    logger = await module.resolve<LoggerService>(LoggerService);
+    
   })
 
   beforeEach(() => {
