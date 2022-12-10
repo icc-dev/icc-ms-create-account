@@ -29,10 +29,12 @@
     "@nestjs/mongoose": "9.2.1",
     "@nestjs/platform-express": "9.0.0",
     "@nestjs/terminus": "9.1.4",
+    "crypto": "^1.0.1",
     "mongoose": "^6.7.4",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
-    "rxjs": "7.2.0"
+    "rxjs": "7.2.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@nestjs/cli": "9.0.0",
