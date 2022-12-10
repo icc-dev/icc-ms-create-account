@@ -1,10 +1,9 @@
+import { AppModule } from './app.module';
 import { INestApplication, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 
 let app: INestApplication;
-
 async function bootstrap() {
   app = await NestFactory.create(
     AppModule
@@ -20,4 +19,4 @@ async function bootstrap() {
 }
 bootstrap();
 
-export {app};
+export { app };
