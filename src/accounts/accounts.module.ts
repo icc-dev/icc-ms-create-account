@@ -1,3 +1,4 @@
+import { LoggerModule } from './../logger/logger.module';
 import { DatabaseModule } from './../database/database.module';
 import { Module } from '@nestjs/common';
 import { CustomConfigModule } from '../custom-config/custom-config.module';
@@ -17,7 +18,8 @@ const accountServiceProvider = {
 @Module({
     imports: [
         CustomConfigModule,
-        DatabaseModule
+        DatabaseModule,
+        LoggerModule
     ],
     controllers: [AddController],
     providers: [

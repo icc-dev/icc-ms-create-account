@@ -1,3 +1,4 @@
+import { LoggerService } from './../../../logger/logger.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccountsService } from '../../../accounts/services/accounts/accounts.service';
 import { AddController } from './add.controller';
@@ -22,6 +23,7 @@ describe('AddController', () => {
       controllers: [AddController],
       providers: [
         AccountsService,
+        LoggerService
       ]
     }).overrideProvider(AccountsService)
     .useClass(AccountsMockService)
