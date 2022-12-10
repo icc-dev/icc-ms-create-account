@@ -1,3 +1,4 @@
+import { LoggerService } from './../../../logger/logger.service';
 import { IAccount } from './../../interface/accounts.interface';
 import { Injectable } from '@nestjs/common';
 import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
@@ -9,13 +10,23 @@ export class AccountsMockService {
 
     constructor() {}
 
-    async addAccount(createAccountDto: CreateAccountDto): Promise<IAccount> {
+    async addAccount(createAccountDto: CreateAccountDto, logger: LoggerService): Promise<IAccount> {
+        logger.log('Saving user', createAccountDto);
         if (!equals(Object.keys(createAccountDto), CreateAccountDto.describe(createAccountDto))) {
             throw new Error("ValidationError");
         }
         this.data.forEach((account) => {
             if (account.email === createAccountDto.email) {
-                throw new Error("PrimarykeyError");
+                throw {
+                    index: 0,
+                    code: 11000,
+                    keyPattern: {
+                        email: 1
+                    },
+                    keyValue: {
+                        email: "iancardernas96@gmail.cl"
+                    }
+                };
             }
         });
         const newData = {

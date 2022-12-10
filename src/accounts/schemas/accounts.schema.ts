@@ -12,14 +12,16 @@ export const AccountSchema = new mongoose.Schema({
     
     // Status management
     status: {
-        type: Object.keys(StatusAccountAvailable),
-        required: true
+        type: String,
+        required: true,
+        enum: StatusAccountAvailable
     },
     
     // features management
     accountType: {
-        type:  Object.keys(TypeAccountAvailable),
-        required: true
+        type: String,
+        required: true,
+        enum: TypeAccountAvailable
     },
     restrictedByLevel: {
         type: Boolean,
@@ -37,13 +39,15 @@ export const AccountSchema = new mongoose.Schema({
         type: String,
         required: true,
         lowercase: true,
-        index: true,
+        index: true
     },
-});
+    accountId: String,
+}).index({ email: 1 }, { unique: true, name: 'emailUniqueKey'});
 
 AccountSchema.pre('save', function(next: Function) {
     const date = getDate();
     this.createdAt = date;
     this.updatedAt = date;
+    this.accountId = this._id.toString();
     next();
 });
