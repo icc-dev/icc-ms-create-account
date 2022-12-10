@@ -1,5 +1,5 @@
+import { IAccount } from './../../interface/accounts.interface';
 import { StatusAccountAvailable, TypeAccountAvailable } from "../../../accounts/enums/accounts.enum";
-import { Accounts } from "../../../accounts/schemas/accounts.schema";
 
 export const VALID_CREATE_ACCOUNT_DTO = {
     email: "iancardernas96@gmail.cl",
@@ -26,15 +26,7 @@ export const ACCOUNTS_MOCK = [
         accountLevel: null,
         subscripted: false,
         email: "iancardernas96@gmail.com",
-        createdAt: {
-            $date: {
-                $numberLong: "1670122309248"
-            }
-        },
-        updatedAt: {
-            $date: {
-                $numberLong: "1670122309248"
-            }
-        },
+        createdAt: null,
+        updatedAt: null,
     }
-] as unknown as Accounts[];
+] as unknown as IAccount[];

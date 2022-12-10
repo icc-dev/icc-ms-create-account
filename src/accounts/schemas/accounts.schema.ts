@@ -1,66 +1,47 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import * as mongoose from 'mongoose';
 import { getDate } from '../../utils/date.utils';
 import { StatusAccountAvailable, TypeAccountAvailable } from '../enums/accounts.enum';
 
 
-@Schema()
-export class Accounts {
+
+export const AccountSchema = new mongoose.Schema({
     // Datetime management
-    @Prop({
-        type: Date,
-    })
-    createdAt: Date;
-    @Prop({
-        type: Date
-    })
-    updatedAt: Date;
-    @Prop({
-        type: Date
-    })
-    lastLogin: Date;
+    createdAt: Date,
+    updatedAt: Date,
+    lastLogin: Date,
     
     // Status management
-    @Prop({
-        lowercase: true,
-        required: true,
-    })
-    status: StatusAccountAvailable;
+    status: {
+        type: Object.keys(StatusAccountAvailable),
+        required: true
+    },
     
     // features management
-    @Prop({
-        required: true,
-    })
-    accountType: TypeAccountAvailable;
-    @Prop({
+    accountType: {
+        type:  Object.keys(TypeAccountAvailable),
+        required: true
+    },
+    restrictedByLevel: {
+        type: Boolean,
         default: false,
-    })
-    restrictedByLevel: boolean;
-    @Prop({
-        default: null
-    })
-    accountLevel: number;
-    @Prop({
+    },
+    accountLevel: {
+        type: Number,
+        default: null,
+    },
+    subscripted: {
+        type: Boolean,
         default: false,
-    })
-    subscripted: boolean;
-    @Prop({
-        required: true,
-        unique: true,
-        index: true,
+    },
+    email: {
         type: String,
+        required: true,
         lowercase: true,
-        
-    })
-    email: string;
-    
-    
-}
+        index: true,
+    },
+});
 
-export type AccountDocument = HydratedDocument<Accounts>;
-export const AccountsSchema = SchemaFactory.createForClass(Accounts);
-
-AccountsSchema.pre<AccountDocument>('save', function(next: Function) {
+AccountSchema.pre('save', function(next: Function) {
     const date = getDate();
     this.createdAt = date;
     this.updatedAt = date;

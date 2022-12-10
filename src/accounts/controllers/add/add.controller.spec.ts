@@ -1,7 +1,5 @@
-import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccountsService } from '../../../accounts/services/accounts/accounts.service';
-import { Accounts } from '../../../accounts/schemas/accounts.schema';
 import { AddController } from './add.controller';
 import { AccountsMockService } from '../../../accounts/services/accounts/accounts.mock.service';
 import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
@@ -10,6 +8,7 @@ import { DUPLICATE_CREATE_ACCOUNT_DTO, MISSING_CREATE_ACCOUNT_DTO, VALID_CREATE_
 describe('AddController', () => {
   let controller: AddController;
   let response: any;
+
   const mockResponse = () => {
     const res: any = {};
     res.status = jest.fn().mockReturnValue(res);
@@ -23,16 +22,13 @@ describe('AddController', () => {
       controllers: [AddController],
       providers: [
         AccountsService,
-        {
-          provide: getModelToken(Accounts.name),
-          useClass: AccountsMockService
-        }
       ]
     }).overrideProvider(AccountsService)
     .useClass(AccountsMockService)
     .compile();
 
     controller = module.get<AddController>(AddController);
+
   })
 
   beforeEach(() => {

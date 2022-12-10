@@ -1,5 +1,5 @@
+import { IAccount } from './../../interface/accounts.interface';
 import { Injectable } from '@nestjs/common';
-import { Accounts } from '../../schemas/accounts.schema';
 import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
 import { ACCOUNTS_MOCK } from '../mock/accounts.mock';
 import { equals } from '../../../utils/object.utils';
@@ -9,7 +9,7 @@ export class AccountsMockService {
 
     constructor() {}
 
-    async addAccount(createAccountDto: CreateAccountDto): Promise<Accounts> {
+    async addAccount(createAccountDto: CreateAccountDto): Promise<IAccount> {
         if (!equals(Object.keys(createAccountDto), CreateAccountDto.describe(createAccountDto))) {
             throw new Error("ValidationError");
         }
@@ -23,8 +23,8 @@ export class AccountsMockService {
             email: createAccountDto.email,
             status: createAccountDto.status,
             accountType: createAccountDto.accountType
-        }
+        } as unknown as IAccount
         this.data.push(newData);
-        return newData as Accounts;
+        return newData as IAccount;
     }
 }
