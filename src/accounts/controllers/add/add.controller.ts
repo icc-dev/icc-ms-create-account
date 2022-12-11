@@ -1,8 +1,12 @@
+import { IAccount } from './../../interface/accounts.interface';
+import { AccountSchema } from './../../schemas/accounts.schema';
 import { LoggerService } from './../../../logger/logger.service';
 import { Controller, Post, Res, Body, HttpStatus, HttpCode, Version, UseFilters } from '@nestjs/common';
 import { Response } from 'express';
 import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
 import { AccountsService } from '../../../accounts/services/accounts/accounts.service';
+import { ApiCreatedResponse, ApiResponse } from '@nestjs/swagger';
+import { CreatedAccountDto } from 'src/accounts/dto/created-account.dto';
 
 @Controller('add')
 export class AddController {
@@ -15,6 +19,12 @@ export class AddController {
     @Post()
     @HttpCode(201)
     @Version('1')
+    @ApiCreatedResponse({
+        description: 'The account has been successfully created.',
+        type: CreatedAccountDto,
+      })
+    @ApiResponse({ status: HttpStatus.UNPROCESSABLE_ENTITY, description: 'Unprocessable entity.'})
+    @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Internal server error in proccess.'})
     async createAccount(@Res() res: Response, @Body() createAccountDto: CreateAccountDto) {
         try {
             this.loggerService.log('Create account controller init');
