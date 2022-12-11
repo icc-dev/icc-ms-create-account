@@ -1,5 +1,5 @@
 import { TypeAccountAvailable, StatusAccountAvailable } from "../enums/accounts.enum";
-import { ApiProperty, ApiQuery } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAccountDto {
     @ApiProperty({

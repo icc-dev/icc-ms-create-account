@@ -1,14 +1,13 @@
-import { IAccount } from './../../interface/accounts.interface';
-import { AccountSchema } from './../../schemas/accounts.schema';
 import { LoggerService } from './../../../logger/logger.service';
 import { Controller, Post, Res, Body, HttpStatus, HttpCode, Version, UseFilters } from '@nestjs/common';
 import { Response } from 'express';
 import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
 import { AccountsService } from '../../../accounts/services/accounts/accounts.service';
-import { ApiCreatedResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreatedAccountDto } from 'src/accounts/dto/created-account.dto';
 
 @Controller('add')
+@ApiTags('create')
 export class AddController {
     constructor(
         private accountsService: AccountsService,
