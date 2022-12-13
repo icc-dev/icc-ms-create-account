@@ -16,6 +16,13 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@utils/*": ["src/utils/*"],
+      "@database/*": ["src/database/*"],
+      "@config/*": ["src/custom-config/*"],
+      "@accounts/*": ["src/accounts/*"],
+      "@logger/*": ["src/logger/*"],
+    }
   }
 }

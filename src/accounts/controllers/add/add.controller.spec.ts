@@ -1,10 +1,10 @@
-import { LoggerService } from './../../../logger/logger.service';
+import { LoggerService } from '@logger/logger.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AccountsService } from '../../../accounts/services/accounts/accounts.service';
+import { AccountsService } from '@accounts/services/accounts/accounts.service';
 import { AddController } from './add.controller';
-import { AccountsMockService } from '../../../accounts/services/accounts/accounts.mock.service';
-import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
-import { DUPLICATE_CREATE_ACCOUNT_DTO, MISSING_CREATE_ACCOUNT_DTO, VALID_CREATE_ACCOUNT_DTO } from '../../../accounts/services/mock/accounts.mock';
+import { AccountsMockService } from '@accounts/services/accounts/accounts.mock.service';
+import { CreateAccountDto } from '@accounts/dto/create-account.dto';
+import { DUPLICATE_CREATE_ACCOUNT_DTO, MISSING_CREATE_ACCOUNT_DTO, VALID_CREATE_ACCOUNT_DTO } from '@accounts/services/mock/accounts.mock';
 
 describe('AddController', () => {
   let controller: AddController;

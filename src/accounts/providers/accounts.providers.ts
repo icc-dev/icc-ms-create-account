@@ -1,7 +1,7 @@
-import { ACCOUNTS_MODEL_NAME } from './../const/providers.const';
-import { AccountSchema } from './../schemas/accounts.schema';
+import { ACCOUNTS_MODEL_NAME } from '@accounts/const/providers.const';
+import { AccountSchema } from '@accounts/schemas/accounts.schema';
 import { Connection } from 'mongoose';
-import { DATABASE_PROVIDER_NAME } from '../const/providers.const';
+import { DATABASE_PROVIDER_NAME } from '@accounts/const/providers.const';
 
 export const accountsProviders = [
   {

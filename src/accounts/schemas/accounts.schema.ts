@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { getDate } from '../../utils/date.utils';
+import { getDate } from '@utils/date.utils';
 import { StatusAccountAvailable, TypeAccountAvailable } from '../enums/accounts.enum';
 
 

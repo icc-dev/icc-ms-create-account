@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { StatusAccountAvailable, TypeAccountAvailable } from './../enums/accounts.enum';
+import { StatusAccountAvailable, TypeAccountAvailable } from '@accounts/enums/accounts.enum';
 export class CreatedAccountDto {
     @ApiProperty()
     createdAt: Date;

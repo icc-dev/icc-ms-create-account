@@ -1,5 +1,5 @@
-import { IAccount } from './../../interface/accounts.interface';
-import { StatusAccountAvailable, TypeAccountAvailable } from "../../../accounts/enums/accounts.enum";
+import { IAccount } from '@accounts/interface/accounts.interface';
+import { StatusAccountAvailable, TypeAccountAvailable } from "@accounts/enums/accounts.enum";
 
 export const VALID_CREATE_ACCOUNT_DTO = {
     email: "iancardernas96@gmail.cl",

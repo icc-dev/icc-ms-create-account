@@ -1,8 +1,8 @@
-import { LoggerService } from './../../../logger/logger.service';
-import { IAccount } from './../../interface/accounts.interface';
+import { LoggerService } from '@logger/logger.service';
+import { IAccount } from '@accounts/interface/accounts.interface';
 import { Injectable, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
+import { CreateAccountDto } from '@accounts/dto/create-account.dto';
 
 @Injectable()
 export class AccountsService {

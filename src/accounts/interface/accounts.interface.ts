@@ -1,4 +1,4 @@
-import { StatusAccountAvailable, TypeAccountAvailable } from "../enums/accounts.enum";
+import { StatusAccountAvailable, TypeAccountAvailable } from "@accounts/enums/accounts.enum";
 import { Document } from 'mongoose';
 
 export interface IAccount extends Document {

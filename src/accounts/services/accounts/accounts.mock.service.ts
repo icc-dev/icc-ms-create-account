@@ -1,9 +1,9 @@
-import { LoggerService } from './../../../logger/logger.service';
-import { IAccount } from './../../interface/accounts.interface';
+import { LoggerService } from '@logger/logger.service';
+import { IAccount } from '@accounts/interface/accounts.interface';
 import { Injectable } from '@nestjs/common';
-import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
+import { CreateAccountDto } from '@accounts/dto/create-account.dto';
 import { ACCOUNTS_MOCK } from '../mock/accounts.mock';
-import { equals } from '../../../utils/object.utils';
+import { equals } from '@utils/object.utils';
 @Injectable()
 export class AccountsMockService {
     private data = ACCOUNTS_MOCK;

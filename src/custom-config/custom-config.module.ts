@@ -1,5 +1,5 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Module, DynamicModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common';
 
 // config files
 import databaseConfig from './config/database.config';

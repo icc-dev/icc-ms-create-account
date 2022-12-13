@@ -1,7 +1,7 @@
-import { LoggerModule } from './../logger/logger.module';
-import { DatabaseModule } from './../database/database.module';
+import { LoggerModule } from '@logger/logger.module';
+import { DatabaseModule } from '@database/database.module';
 import { Module } from '@nestjs/common';
-import { CustomConfigModule } from '../custom-config/custom-config.module';
+import { CustomConfigModule } from '@config/custom-config.module';
 import { AddController } from './controllers/add/add.controller';
 import { AccountsService } from './services/accounts/accounts.service';
 import { AccountsMockService } from './services/accounts/accounts.mock.service';

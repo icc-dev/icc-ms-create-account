@@ -1,10 +1,10 @@
-import { LoggerService } from './../../../logger/logger.service';
-import { Controller, Post, Res, Body, HttpStatus, HttpCode, Version, UseFilters } from '@nestjs/common';
+import { LoggerService } from '@logger/logger.service';
+import { Controller, Post, Res, Body, HttpStatus, HttpCode, Version } from '@nestjs/common';
 import { Response } from 'express';
-import { CreateAccountDto } from '../../../accounts/dto/create-account.dto';
-import { AccountsService } from '../../../accounts/services/accounts/accounts.service';
+import { CreateAccountDto } from '@accounts/dto/create-account.dto';
+import { AccountsService } from '@accounts/services/accounts/accounts.service';
 import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreatedAccountDto } from 'src/accounts/dto/created-account.dto';
+import { CreatedAccountDto } from '@accounts/dto/created-account.dto';
 
 @Controller('add')
 @ApiTags('create')
