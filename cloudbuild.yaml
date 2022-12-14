@@ -17,3 +17,5 @@ steps:
   args: ['run', 'deploy', '${_SERVICE_NAME}', '--image', 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$BRANCH_NAME-$SHORT_SHA', '--region', '$_REGION']
 images:
 - gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$BRANCH_NAME-$SHORT_SHA
+options:
+  logging: CLOUD_LOGGING_ONLY
