@@ -4,7 +4,13 @@ steps:
   args: [
     '-c',
     'gcloud secrets versions access $_SECRET_VERSION --secret=${_SERVICE_NAME} > .env'
-  ] 
+  ]
+- name: node
+  entrypoint: npm
+  args: ['install']
+- name: node
+  entrypoint: npm
+  args: ['test']
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$BRANCH_NAME-$SHORT_SHA', '.']
