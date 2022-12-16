@@ -1,4 +1,4 @@
-import { LoggerService } from '@logger/logger.service';
+import { LoggerService } from '@icc-dev/icc-log-service'
 import { Controller, Post, Res, Body, HttpStatus, HttpCode, Version } from '@nestjs/common';
 import { Response } from 'express';
 import { CreateAccountDto } from '@accounts/dto/create-account.dto';

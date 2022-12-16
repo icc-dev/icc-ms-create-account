@@ -1,4 +1,4 @@
-import { LoggerService } from '@logger/logger.service';
+import { LoggerService } from '@icc-dev/icc-log-service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccountsService } from '@accounts/services/accounts/accounts.service';
 import { AddController } from './add.controller';

@@ -1,4 +1,3 @@
-import { LoggerModule } from '@logger/logger.module';
 import { DatabaseModule } from '@database/database.module';
 import { Module } from '@nestjs/common';
 import { CustomConfigModule } from '@config/custom-config.module';
@@ -6,6 +5,7 @@ import { AddController } from './controllers/add/add.controller';
 import { AccountsService } from './services/accounts/accounts.service';
 import { AccountsMockService } from './services/accounts/accounts.mock.service';
 import { accountsProviders } from './providers/accounts.providers';
+import { LoggerModule } from '@icc-dev/icc-log-service'
 
 
 const accountServiceProvider = {
@@ -19,12 +19,18 @@ const accountServiceProvider = {
     imports: [
         CustomConfigModule,
         DatabaseModule,
-        LoggerModule
+        LoggerModule.forRoot({
+            meta: {
+                saga: 'accounts',
+                service: 'create',
+                type: 'ms',
+            }
+        }),
     ],
     controllers: [AddController],
     providers: [
         accountServiceProvider,
-        ...accountsProviders
+        ...accountsProviders,
     ]
 })
 export class AccountsModule {}

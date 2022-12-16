@@ -1,4 +1,4 @@
-import { LoggerService } from '@logger/logger.service';
+import { LoggerService } from '@icc-dev/icc-log-service';
 import { IAccount } from '@accounts/interface/accounts.interface';
 import { Injectable } from '@nestjs/common';
 import { CreateAccountDto } from '@accounts/dto/create-account.dto';
