@@ -12,8 +12,7 @@ export class AddController {
     constructor(
         private accountsService: AccountsService,
         private loggerService: LoggerService,
-    ) {
-    }
+    ) { }
 
     @Post()
     @HttpCode(201)

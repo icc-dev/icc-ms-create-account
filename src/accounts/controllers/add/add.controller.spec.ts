@@ -9,6 +9,7 @@ import { DUPLICATE_CREATE_ACCOUNT_DTO, MISSING_CREATE_ACCOUNT_DTO, VALID_CREATE_
 describe('AddController', () => {
   let controller: AddController;
   let logger: LoggerService;
+  let accountSrvc: AccountsService;
   let response: any;
 
   let loggerService = { 
@@ -41,6 +42,7 @@ describe('AddController', () => {
 
     controller = module.get<AddController>(AddController);
     logger = await module.resolve<LoggerService>(LoggerService);
+    accountSrvc = await module.resolve<AccountsService>(AccountsService);
     
   })
 
@@ -55,6 +57,14 @@ describe('AddController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  it('logger service should be defined', () => {
+    expect(logger).toBeDefined();
+  });
+
+  it('accountSrvc service should be defined', () => {
+    expect(accountSrvc).toBeDefined();
   });
 
   describe('422 Unprocessable Entity', () => {
