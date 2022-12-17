@@ -21,7 +21,4 @@ describe('AccountsService', () => {
     expect(service).toBeDefined();
   });
 
-  afterAll((done) => {
-    done()
-  })
 });
