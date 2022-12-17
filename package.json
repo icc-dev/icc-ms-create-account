@@ -80,9 +80,11 @@
     "moduleNameMapper": {
       "^@utils(.*)$": "<rootDir>/utils$1",
       "^@database(.*)$": "<rootDir>/database$1",
-      "^@config(.*)$": "<rootDir>/config$1",
-      "^@accounts(.*)$": "<rootDir>/accounts$1",
-      "^@logger(.*)$": "<rootDir>/logger$1"
-    }
+      "^@config(.*)$": "<rootDir>/custom-config$1",
+      "^@accounts(.*)$": "<rootDir>/accounts$1"
+    },
+    "coveragePathIgnorePatterns": [
+      ".module.ts"
+    ]
   }
 }
