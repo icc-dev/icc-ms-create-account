@@ -19,7 +19,12 @@ export class CreateAccountDto {
         enum: StatusAccountAvailable
     })
     status: StatusAccountAvailable;
-
+    @ApiProperty({
+        type: String,
+        required: true
+    })
+    password: String
+    
     static describe(instance): Array<string> {
         return Object.getOwnPropertyNames(instance);
     }

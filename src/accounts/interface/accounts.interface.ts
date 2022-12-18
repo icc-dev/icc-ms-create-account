@@ -11,4 +11,6 @@ export interface IAccount extends Document {
     readonly accountLevel: Number;
     readonly subscripted: Boolean;
     readonly email: String;
+
+    setPassword(password): void;
 }

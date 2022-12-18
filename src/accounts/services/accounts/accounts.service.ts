@@ -14,6 +14,7 @@ export class AccountsService {
     async addAccount(createAccountDto: CreateAccountDto, logger: LoggerService): Promise<IAccount> {
         logger.log('Saving user', createAccountDto);
         const accountRef = new this.accountsModels(createAccountDto);
+        accountRef.setPassword(createAccountDto.password)
         const validateError = accountRef.validateSync();
         if (validateError) {
             throw validateError['errors'];
