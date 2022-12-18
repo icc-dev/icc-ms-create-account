@@ -6,6 +6,7 @@ import { AccountsService } from './services/accounts/accounts.service';
 import { AccountsMockService } from './services/accounts/accounts.mock.service';
 import { accountsProviders } from './providers/accounts.providers';
 import { LoggerModule } from '@icc-dev/icc-log-service'
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 
 const accountServiceProvider = {
@@ -26,6 +27,9 @@ const accountServiceProvider = {
                 type: 'ms',
             }
         }),
+        ClientsModule.register([
+            { name: 'EMAIL_SERVICE', transport: Transport.TCP },
+        ]),
     ],
     controllers: [AddController],
     providers: [
