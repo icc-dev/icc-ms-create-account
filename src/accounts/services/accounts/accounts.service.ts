@@ -18,6 +18,6 @@ export class AccountsService {
         if (validateError) {
             throw validateError['errors'];
         }
-        return accountRef.save();
+        return accountRef.save({ timestamps: true });
     }
 }
