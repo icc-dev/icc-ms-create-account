@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { LoggerService } from '@icc-dev/icc-log-service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccountsService } from '@accounts/services/accounts/accounts.service';
@@ -10,6 +11,7 @@ describe('AddController', () => {
   let controller: AddController;
   let logger: LoggerService;
   let accountSrvc: AccountsService;
+  let configSrvc: ConfigService;
   let response: any;
 
   let loggerService = { 
@@ -46,6 +48,12 @@ describe('AddController', () => {
           useValue: {
             emit: jest.fn(),
           } 
+        },
+        {
+          provide: ConfigService,
+          useValue: {
+            getOrThrow: jest.fn()
+          }
         }
       ]
     }).overrideProvider(AccountsService)
@@ -55,6 +63,7 @@ describe('AddController', () => {
     controller = module.get<AddController>(AddController);
     logger = await module.resolve<LoggerService>(LoggerService);
     accountSrvc = await module.resolve<AccountsService>(AccountsService);
+    configSrvc = await module.resolve<ConfigService>(ConfigService);
     
   })
 
