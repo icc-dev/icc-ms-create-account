@@ -9,7 +9,7 @@ async function bootstrap() {
     AccountsModule,
     {
       transport: Transport.TCP,
-      port: process.env.MS_PORT
+      port: process.env.PORT
     }
   );
   await app.listen();

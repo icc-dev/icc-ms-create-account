@@ -6,11 +6,10 @@ import { CreateAccountDto } from '@accounts/dto/create-account.dto';
 import { AccountsService } from '@accounts/services/accounts/accounts.service';
 import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreatedAccountDto } from '@accounts/dto/created-account.dto';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import { EMPTY, firstValueFrom } from 'rxjs';
 
 @Controller('add')
-@ApiTags('create')
 export class AddController {
     constructor(
         private accountsService: AccountsService,
@@ -19,16 +18,8 @@ export class AddController {
         @Inject('EMAIL_SERVICE') private emailService: ClientProxy,
     ) { }
 
-    @Post()
-    @HttpCode(201)
-    @Version('1')
-    @ApiCreatedResponse({
-        description: 'The account has been successfully created.',
-        type: CreatedAccountDto,
-      })
-    @ApiResponse({ status: HttpStatus.UNPROCESSABLE_ENTITY, description: 'Unprocessable entity.'})
-    @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Internal server error in proccess.'})
-    async createAccount(@Res() res: Response, @Body() createAccountDto: CreateAccountDto) {
+    @MessagePattern({ cmd: 'create_new_account' })
+    async createAccount(createAccountDto: CreateAccountDto) {
         try {
             this.loggerService.log('Create account controller init');
             this.loggerService.log('Get configuration email');
@@ -36,7 +27,7 @@ export class AddController {
             this.loggerService.log('Template getting', tempalteId)
             if (!createAccountDto || !Object.keys(createAccountDto).length) {
                 this.loggerService.warn('Unprocessable entity', createAccountDto);
-                return res.status(HttpStatus.UNPROCESSABLE_ENTITY).send();
+                return Promise.reject({ message: 'Unprocessable entity', data: createAccountDto })
             }
             const accountCreated = await this.accountsService.addAccount(createAccountDto, this.loggerService);
             this.loggerService.log('Add account intruction finished correctly', accountCreated);
@@ -48,12 +39,13 @@ export class AddController {
                 this.loggerService.error('Mail not sended', error);
                 return EMPTY
             });
-            return res.status(HttpStatus.CREATED).send({accountCreated});
+            return Promise.resolve({
+                message: 'created',
+                data: accountCreated
+            })
         } catch (error) {
             this.loggerService.error('An error has occurred', error);
-            return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
-                error
-            });
+            return Promise.reject({ message: 'Internal server error', data: error })
         }
     }
 }

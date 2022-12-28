@@ -88,7 +88,7 @@ describe('AddController', () => {
     expect(accountSrvc).toBeDefined();
   });
 
-  describe('422 Unprocessable Entity', () => {
+  /* describe('422 Unprocessable Entity', () => {
     it('should be return 422 empty body', async () => {
       await controller.createAccount(
         response,
@@ -131,7 +131,7 @@ describe('AddController', () => {
       );
       expect(response.status).toHaveBeenCalledWith(500);
     });
-  });
+  }); */
 
 
 });

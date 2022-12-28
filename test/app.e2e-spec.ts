@@ -1,28 +1,34 @@
-import 'reflect-metadata';
-
-import { AccountsModule } from './../src/accounts/accounts.module';
+import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
+import { AccountsModule } from '@accounts/accounts.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+  let client: ClientProxy;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AccountsModule],
+      imports: [
+        AccountsModule,
+        ClientsModule.register([
+          { name: 'EMAIL_SERVICE', transport: Transport.TCP },
+        ]),
+      ],
     })
     .compile();
 
     app = moduleFixture.createNestApplication();
-    await app.init();
-  });
+    app.connectMicroservice({
+      transport: Transport.TCP,
+    });
 
-  it('/icc/ms/accounts/v1/add (POST)', () => {
-    return request(app.getHttpServer())
-      .post('/icc/ms/accounts/v1/add')
-      .expect(200)
-      .expect('Hello World!');
+    await app.startAllMicroservices();
+    await app.init();
+
+    client = app.get('EMAIL_SERVICE');
+    await client.connect();
   });
 
 });
