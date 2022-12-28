@@ -1,32 +1,18 @@
-import { AppModule } from './app.module';
-import { INestApplication, VersioningType } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { AccountsModule } from '@accounts/accounts.module';
+import { INestMicroservice } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Transport } from '@nestjs/microservices';
 
-let app: INestApplication;
+let app: INestMicroservice;
 async function bootstrap() {
-  app = await NestFactory.create(
-    AppModule
+  app = await NestFactory.createMicroservice(
+    AccountsModule,
+    {
+      transport: Transport.TCP,
+      port: process.env.MS_PORT
+    }
   );
-  app.setGlobalPrefix('icc/ms/accounts');
-  app.enableVersioning({
-    type: VersioningType.URI,
-  });
-
-  const swaggerConfig = new DocumentBuilder()
-    .setTitle('Create account microservice') 
-    .setDescription('Microservice to create accounts')
-    .setVersion('1.0')
-    .addTag('Account')
-    .build();
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api', app, document);
-
-  const config =  app.get(ConfigService);
-  const port = config.get<number>('application.port');
-  await app.listen(port);
-  console.log(`Microservice already running in ${await app.getUrl()}/`)
+  await app.listen();
 }
 bootstrap();
 
